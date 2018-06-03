@@ -1,0 +1,308 @@
+#QPlayer ::-webkit-scrollbar {
+	width: 3px;
+}
+#QPlayer ::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background: rgba(0,0,0,0.1);
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+#QPlayer ::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+}
+@-webkit-keyframes rotate {
+	from {
+		-webkit-transform:rotate(0deg)
+	}
+	to {
+		-webkit-transform:rotate(360deg)
+	}
+}
+@-moz-keyframes rotate {
+		from {
+		-moz-transform:rotate(0deg)
+	}
+	to {
+		-moz-transform:rotate(360deg)
+	}
+}
+@-ms-keyframes rotate {
+	from {
+		-ms-transform:rotate(0deg)
+	}
+	to {
+		-ms-transform:rotate(360deg)
+	}
+}
+@-o-keyframes rotate {
+	from {
+		-o-transform:rotate(0deg)
+	}
+	to {
+		-o-transform:rotate(360deg)
+	}
+}
+#QPlayer {
+	position: fixed;
+	left: -250px;
+	bottom: 50px;
+	transition: transform .8s;
+}
+#QPlayer.pop {
+	transform: translateX(250px);
+}
+#QPlayer .player {
+	float: left;
+	width: 250px;
+	height: 60px;
+	background: rgb(255,255,255);
+}
+#QPlayer .cover {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+}
+#QPlayer .cover img {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	cursor: pointer;
+}
+#QPlayer .cover img.rotate {
+	animation: rotate 10s linear 0s infinite normal none paused;
+}
+#QPlayer.playing .cover img.rotate {
+	animation-play-state: running;
+}
+#QPlayer .ctrl {
+	padding: 8px;
+	margin-left: 60px;
+	line-height: 14px;
+	font-size: 14px;
+	color: #636363;
+}
+#QPlayer .title {
+	overflow: hidden;
+}
+#QPlayer .title strong, #QPlayer .title span {
+	display: inline;
+	width: 80%;
+	font-size: 85%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+#QPlayer .title span {
+	margin-top: 5px;
+	font-size: 12px;
+	color: #757575;
+}
+#QPlayer .progress {
+	height: 2px;
+	margin: 6px 0;
+	background: #cdcdcd;
+	cursor: pointer;
+}
+#QPlayer .progress .already {
+	position: relative;
+	max-width: 100%;
+	height: 2px;
+	background: #e12;
+}
+#QPlayer .progress .btn {
+	position: absolute;
+	top: -4px;
+	right: -4px;
+	width: 8px;
+	height: 8px;
+	background-color: #FFF;
+	border-radius: 50%;
+	border: 1px solid #d0d0d0;
+}
+#QPlayer .timer {
+	font-size: 12px;
+	color: #5f5f5f;
+	line-height: 18px;
+}
+#QPlayer .icon {
+	background: url(icon.png) no-repeat;
+	cursor: pointer;
+}
+#QPlayer .icon.last, #QPlayer .icon.next {
+	position: absolute;
+	top: 4px;
+	width: 9px;
+	height: 10px;
+}
+#QPlayer .icon.last {
+	left: 0;
+	background-position: -36px 0;
+}
+#QPlayer .icon.play {
+	width: 14px;
+	height: 18px;
+	margin: 0 auto;
+}
+#QPlayer.playing .icon.play {
+	background-position: -18px 0;
+}
+#QPlayer .icon.next {
+	right: 0;
+	background-position: -49px 0;
+}
+#QPlayer .contr {
+	position: relative;
+}
+#QPlayer .contr .left {
+	position: absolute;
+}
+#QPlayer .contr .center {
+	position: relative;
+	width: 72px;
+	margin: 0 auto;
+}
+#QPlayer .contr .right {
+	position: absolute;
+	top: 4px;
+	right: 0;
+}
+#QPlayer .contr .right div {
+	float: left;
+	margin-left: 5px;
+}
+#QPlayer .lyric-btn {
+	width: 10px;
+	height: 11px;
+	background-position: -79px 0;
+}
+#QPlayer .list-btn {
+	width: 13px;
+	height: 11px;
+	background-position: -62px 0;
+}
+#QPlayer .contr .icon {
+	opacity: .8;
+}
+#QPlayer .contr .icon:hover {
+	opacity: 1;
+}
+#QPlayer .pop-btn {
+	float: left;
+	width: 20px;
+	height: 60px;
+	background: #e12;
+	cursor: pointer;
+}
+#QPlayer .pop-btn .icon {
+	position: relative;
+	top: 20px;
+	width: 20px;
+	height: 20px;
+	background-position: -92px 0;
+	-webkit-transition: all .3s ease-out;
+	-moz-transition: all .3s ease-out;
+	-ms-transition: all .3s ease-out;
+	-o-transition: all .3s ease-out;
+	transition: all .3s ease-out;
+}
+#QPlayer.pop .pop-btn .icon {
+	transform: rotate(180deg);
+}
+#QPlayer.unselectable, #QPlayer .icon {
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+#QPlayer .list {
+	float: left;
+	width: 248px;
+	max-height: .02px;
+	padding: 0;
+	margin: 0;
+	overflow: auto;
+	background: rgb(255,255,255);
+	border: none;
+	transition: max-height .8s;
+}
+#QPlayer .more.list-show .list{
+	max-height: 358px;
+	border: 1px solid rgb(222, 222, 222);
+	transform: none;
+}
+#QPlayer .list li {
+	padding: 2px 10px;
+	overflow: hidden;
+	color: #989898;
+	font-size: 11px;
+	line-height: 2;
+	text-overflow: ellipsis;
+	list-style-position: inside;
+	list-style-type: decimal;
+	cursor: pointer;
+}
+#QPlayer .list li.error {
+	color: rgb(221, 221, 221) !important;
+}
+#QPlayer .list li:hover, #QPlayer .list li.current {
+	padding: 2px 10px 2px 6px;
+	color: #716e6e;
+	font-weight: bold;
+	border-left: 4px solid #e12;
+}
+#QPlayer .list strong {
+	margin-left: 5px;
+}
+#QPlayer .list span {
+	float: right;
+}
+#QPlayer .list li, #QPlayer .contr .icon{
+	transition: .2s;
+	-webkit-font-smoothing: antialiased;
+}
+#QPlayer .lyric {
+	float: left;
+	width: 150px;
+	height: 0;
+	overflow: hidden;
+	background: rgba(255,255,255,.8);
+	border-radius: 0 5px 5px 0;
+	transition: height .8s;
+}
+#QPlayer .more.lyric-show .lyric {
+	height: 160px;
+	border: 1px solid rgb(222, 222, 222);
+}
+#QPlayer .lyric ol {
+	height: 150px;
+	margin: 5px;
+	padding: 0;
+	overflow: auto;
+	font-size: 12px;
+	text-align: center;
+}
+#QPlayer .lyric ol.no li {
+	position: relative;
+	top: 50%;
+	margin: 0;
+	transform: translateY(-50%);
+}
+#QPlayer .lyric li {
+	margin: 10px 0 10px;
+}
+#QPlayer .lyric ol.no,
+#QPlayer .lyric li.current {
+	color: #e12;
+}
+#QPlayer .more {
+	float: left;
+	transition: transform .8s;
+}
+#QPlayer .more.lyric-show,
+#QPlayer.pop .more.list-show.lyric-show,
+#QPlayer.pop .more.list-show{
+	transform: translateX(0);
+}
+#QPlayer .more, #QPlayer.pop .more.lyric-show {
+	transform: translateX(-250px);
+}

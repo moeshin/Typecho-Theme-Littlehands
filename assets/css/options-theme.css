@@ -1,0 +1,87 @@
+#emoji-edit>div{
+	overflow: hidden;
+}
+#emoji-edit table{
+	
+}
+#emoji-edit button{
+	border: none;
+	background-color: #E9E9E6;
+	border-radius: 2px;
+	padding: 0 12px;
+	color: #666;
+	height: 28px;
+	-moz-transition-duration: .4s;
+	-o-transition-duration: .4s;
+	-webkit-transition-duration: .4s;
+	transition-duration: .4s;
+}
+#emoji-edit button:hover{
+	background-color: #dbdbd6;
+}
+#emoji-edit td span,#emoji-edit td img{
+	color: #467B96;
+	cursor: pointer;
+}
+#emoji-edit td span:hover{
+	color: #499BC3;
+	text-decoration: underline;
+}
+.col-mb-12.col-tb-4 button{
+	margin: 0 .5rem .5rem 0;
+}
+.emoji-batch{
+	margin-bottom: 7px;
+}
+.emoji-batch button{
+	margin-left: 5px;
+}
+.typecho-option-tabs li:first-child span {
+    -moz-border-radius: 2px 0 0 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px 0 0 2px;
+}
+.typecho-option-tabs li:last-child span{
+	-moz-border-radius: 0 2px 2px 0;
+    -webkit-border-radius: 0;
+    border-radius: 0 2px 2px 0;
+	margin-right: 10px;
+}
+.typecho-option-tabs span{
+	display: block;
+    margin-right: -1px;
+    border: 1px solid #D9D9D6;
+    padding: 0 15px;
+    height: 26px;
+    line-height: 26px;
+    color: #666;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+	cursor: pointer;
+}
+.typecho-option-tabs span:hover{
+	background-color: #E9E9E6;
+    color: #666;
+}
+.emoji-edit-display ul{
+	margin: 0;
+}
+.emoji-edit-display :first-child{
+	float: left;
+}
+.emoji-edit-display :last-child{
+	float: right;
+}
+.typecho-option-tabs li.current span{
+    background-color: #E9E9E6;
+}
+#emoji-edit-json{
+	margin-top: .5rem;
+}
+#emoji-edit-json textarea{
+	height: 15rem;
+}
+.description red{
+	color: red;
+}
