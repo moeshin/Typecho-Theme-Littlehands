@@ -1,6 +1,8 @@
 # Typecho Littlehands 主题
 一款基于Typecho原生主题修改的主题
+
 Dome: https://www.littlehands.site/
+
 [GitHub 地址](https://github.com/moeshin/Typecho-Theme-Littlehands) | [GitHub 下载](https://codeload.github.com/moeshin/Typecho-Theme-Littlehands/zip/master)
 
 ## 功能
