@@ -1,3 +1,12 @@
+/**
+ * QPlayer
+ * 一款简洁小巧的HTML5底部悬浮音乐播放器
+ * @package QPlayer
+ * @author 小さな手は
+ * @version 1.0.1
+ * @link https://www.littlehands.site/
+ * @link https://github.com/moeshin/QPlayer/
+ */
 window.QPlayer = {
 	isAuto: false,
 	onSetRotate: function () {}
@@ -164,7 +173,21 @@ $(function () {
 			index: -1
 		};
 		const
-			apiUrl = 'https://api.littlehands.site/NeteaseMusic/',
+			
+			/**
+			 * 网易云API
+			 * 
+			 * @link https://github.com/moeshin/API-NeteaseMusic/
+			 */
+			api1 = '//api.littlehands.site/NeteaseMusic/',
+			
+			/**
+			 * 重定向API
+			 * 
+			 * @link https://github.com/moeshin/API-Redirect/
+			 */
+			api2 = '//api.littlehands.site/Redirect/',
+			
 			lyricRegex1 = /(?:^|\n)((?:\[\d\d:\d\d\.\d{2,3}\])+)(.*)/g;
 			lyricRegex2 = /\[(\d\d):(\d\d\.\d{2,3})\]/g;
 		
@@ -172,8 +195,7 @@ $(function () {
 	
 	//获取播放歌单列表
 	$.ajax({
-		url: apiUrl,
-		dataType: 'JSONP',
+		url: api1,
 		data: {
 			type: 'list',
 			id: q.id
@@ -216,92 +238,120 @@ $(function () {
 	 * @param int
 	 */
 	q.play = function (n) {
-		q.load(n);
-		if (isLoad) {
-			audio.src = 'https://music.163.com/song/media/outer/url?id='+q.current.id+'.mp3';
-			audio.load();
-			isLoad = false;
-			if (isExceedTitle())
-				$title.marquee({
-					duration: 15000,
-					gap: 50,
-					delayBeforeStart: 0,
-					direction: 'left',
-					duplicated: true
-				});
-		}
+		if (q.load(n))
+			return;
 		$player.addClass('playing');
-		audio.play();
+		if (isLoad) {
+			var id = q.current.id;
+			isLoad = false;
+			audio.load();
+			if (isExceedTitle())
+					$title.marquee({
+						duration: 15000,
+						gap: 50,
+						delayBeforeStart: 0,
+						direction: 'left',
+						duplicated: true
+					});
+			$.ajax({
+				url: api2,
+				data: {
+					url: 'https://music.163.com/song/media/outer/url?id='+id,
+					type: 1
+				},
+				success: function (json) {
+					if (id !== q.current.id)
+						return;
+					var url;
+					if ((url = json[1].url) == 'http://music.163.com/404') {
+						q.error();
+						return;
+					}
+					audio.src = url.replace(/^http(s|):/, '');
+					q.playId = id;
+					if ($player.hasClass('playing'))
+						audio.play();
+				}
+			});
+		} else {
+			if (q.playId !== q.current.id || audio.networkState == 3)
+				return;
+			audio.play();
+		}
 	}
 	
 	/**
 	 * 加载
 	 * 
 	 * @param int
+	 * @return void
 	 */
 	q.load = function (n) {
-		if (n || n === 0) {
-			q.listIndex = n
-			$listLi.removeClass('current').eq(n).addClass('current');
-			var data = q.current = QPlayer.list[n];
-			$title.html('<strong>'+data.name+'</strong><span> - </span><span class="artist">'+data.artist.join('/')+'</span>');
-			$cover.attr('src', data.pic.replace(/^http(s|):/i,'https:'));
-			$already.width('0%');
-			$timer.text('00:00');
-			$lyricOl.addClass('no').html('<li>暂无歌词，请欣赏</li>');
-			lyric.arr = [];
-					lyric.obj = {};
-					lyric.index = -1;
-			$lyricLi = $();
-			$.ajax({
-				url: apiUrl,
-				dataType: 'JSONP',
-				data: {
-					type: 'lyric',
-					id: data.id
-				},
-				success: function (json) {
-					json.lyric.replace(lyricRegex1, function (match1, t, str) {
-						var times = [];
-						t.replace(lyricRegex2, function (match2, min, s) {
-							times.push(min*60+s*1);
-						});
-						for (var i = 0; i < times.length; i++) {
-							var time = times[i];
+		if (n < 0 || $listLi.eq(n).hasClass('error')) {
+			q.next();
+			return true;
+		}
+		if (n == null)
+			return;
+		q.listIndex = n
+		$listLi.removeClass('current').eq(n).addClass('current');
+		var data = q.current = QPlayer.list[n];
+		$title.html('<strong>'+data.name+'</strong><span> - </span><span class="artist">'+data.artist.join('/')+'</span>');
+		$cover.attr('src', data.pic.replace(/^http(s|):/i,''));
+		$already.width('0%');
+		$timer.text('00:00');
+		$lyricOl.addClass('no').html('<li>暂无歌词，请欣赏</li>');
+		lyric.arr = [];
+		lyric.obj = {};
+		lyric.index = -1;
+		$lyricLi = $();
+		$.ajax({
+			url: api1,
+			data: {
+				type: 'lyric',
+				id: data.id
+			},
+			success: function (json) {
+				json.lyric.replace(lyricRegex1, function (match1, t, str) {
+					var times = [];
+					t.replace(lyricRegex2, function (match2, min, s) {
+						times.push(min*60+s*1);
+					});
+					for (var i = 0; i < times.length; i++) {
+						var time = times[i];
+						lyric.arr.push(time);
+						lyric.obj[time] = str?str:'';
+					}
+				});
+				json.tlyric.replace(lyricRegex1, function (match1, t, str) {
+					var times = [];
+					t.replace(lyricRegex2, function (match2, min, s) {
+						times.push(min*60+s*1);
+					});
+					for (var i = 0; i < times.length; i++) {
+						var time = times[i];
+						if (lyric.obj[time] !== undefined)
+							lyric.obj[time] += '<br>'+str;
+						else {
 							lyric.arr.push(time);
 							lyric.obj[time] = str?str:'';
 						}
-					});
-					json.tlyric.replace(lyricRegex1, function (match1, t, str) {
-						var times = [];
-						t.replace(lyricRegex2, function (match2, min, s) {
-							times.push(min*60+s*1);
-						});
-						for (var i = 0; i < times.length; i++) {
-							var time = times[i];
-							if (lyric.obj[time] !== undefined)
-								lyric.obj[time] += '<br>'+str;
-							else {
-								lyric.arr.push(time);
-								lyric.obj[time] = str?str:'';
-							}
-						}
-						
-					});
-
-					lyric.arr = lyric.arr.sort(function (a, b) {
-						return a-b;
-					});
-					if (lyric.arr.length > 0)
-						$lyricOl.removeClass('no').html('');
-					for (var i = 0; i < lyric.arr.length; i++) {
-						$lyricOl.append('<li>'+lyric.obj[lyric.arr[i]]+'</li>');
 					}
-					$lyricLi = $lyricOl.find('li');
+					
+				});
+
+				lyric.arr = lyric.arr.sort(function (a, b) {
+					return a-b;
+				});
+				if (lyric.arr.length > 0)
+					$lyricOl.removeClass('no').html('');
+				for (var i = 0; i < lyric.arr.length; i++) {
+					$lyricOl.append('<li>'+lyric.obj[lyric.arr[i]]+'</li>');
 				}
-			});
-			isLoad = true;
-		}
+				$lyricLi = $lyricOl.find('li');
+			}
+		});
+		isLoad = true;
 	}
 	
 	/**
@@ -309,6 +359,8 @@ $(function () {
 	 * 
 	 */
 	q.pause = function () {
+		if (audio.networkState == 3)
+			return;
 		$player.removeClass('playing');
 		audio.pause();
 	}
@@ -342,6 +394,16 @@ $(function () {
 			q.histIndex = 0;
 		} else
 			q.play(q.history[--q.histIndex]);
+	}
+	
+	/**
+	 * 播放错误
+	 * 
+	 */
+	q.error = function () {
+		$listLi.eq(q.listIndex).addClass('error');
+		q.history.splice(q.histIndex--, 1);
+		q.next();
 	}
 	
 	/**
@@ -464,11 +526,7 @@ $(function () {
 				if (lyric.arr[lyric.index+1] <= audio.currentTime)
 					lyricSelect(++lyric.index);
 		})
-		.on('error', function () {
-			$listLi.eq(q.listIndex).addClass('error');
-			q.history.splice(q.histIndex--, 1);
-			q.next();
-		});
+		.on('error', q.error);
 	
 	$listBtn.click(function () {
 		$more.toggleClass('list-show');

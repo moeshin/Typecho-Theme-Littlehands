@@ -417,12 +417,17 @@ window.QPlayer = {};
 	}
 	
 })();
-
-
-
-
 $('form').submit(function(){
 	emoji.setData();
 	if (QPlayer)
 		QPlayer.submit();
+});
+
+/**
+ * 检测更新
+ */
+$.get(themeUrl+'/assets/php/update.php', function (data) {
+	if (data == 1)
+		$('<div class="update-check message error"><p><stong><a href="https://github.com/moeshin/Typecho-Theme-Littlehands" target="_blank">有新版本可更新！</a><stong></p></div>')
+			.insertAfter('.typecho-page-title').effect('highlight');
 });

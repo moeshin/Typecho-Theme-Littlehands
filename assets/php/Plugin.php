@@ -1,26 +1,19 @@
 <?php
-
-/** 注册插件 */
-$advanced = Helper::options()->advanced;
-Typecho_Plugin::factory('admin/footer.php')->end = ['theme_plugin', 'admin_footer'];
-Typecho_Plugin::factory('Widget_Abstract_Contents')->contentEx = ['theme_plugin', 'Widget_Abstract_Contents_contentEx'];
-if(inArray('Parsedown', $advanced)){
-	Typecho_Plugin::factory('Widget_Abstract_Contents')->markdown = ['theme_plugin', 'markdown'];
-	Typecho_Plugin::factory('Widget_Abstract_Comments')->markdown = ['theme_plugin', 'markdown'];
-}
-if(!class_exists('ShortCode')&&inArray('ShortCode', $advanced))
-	require_once 'ShortCode.php';
-
-
 /**
  * 主题插件
  * 
  * @package theme_plugin 
  * @author 小さな手は
- * @version 1.0.0
  * @link https://www.littlehands.site/
  */
 class theme_plugin{
+	
+	/**
+	 * 版本号
+	 *
+	 * @access public
+	 */
+	public static $version = '1.0.0';
 	
 	/**
 	 * 管理页面页脚自定义
@@ -34,8 +27,7 @@ class theme_plugin{
 		$siteUrl = $options->siteUrl;
 		switch(preg_replace('#.*?/admin/(.*?)(?:\.php|)$#','$1',$_SERVER['PHP_SELF'],1)){
 			case 'options-theme':
-				$time = time();
-				echo "<script>var themeUrl = '$themeUrl',siteUrl = '$siteUrl';</script><script src='$themeUrl/assets/js/options-theme.js?t=$time'></script><link rel='stylesheet' href='$themeUrl/assets/css/options-theme.css?t=$time'>";
+				echo "<script>var themeUrl = '$themeUrl',siteUrl = '$siteUrl';</script><script src=\"$themeUrl/assets/js/options-theme.js\"></script><link rel=\"stylesheet\" href=\"$themeUrl/assets/css/options-theme.css\">";
 				break;
 		}
 	}
@@ -49,7 +41,7 @@ class theme_plugin{
 	 * @param string
 	 * @return string 
 	 */
-	public static function Widget_Abstract_Contents_contentEx($content,$archive,$last){
+	public static function Widget_Abstract_Contents_contentEx($content,$archive,$last) {
 		if($last) $content = $last;
 		require_once 'phpQuery.php';
 		$pq = phpQuery::newDocumentHTML($content);
@@ -97,9 +89,27 @@ class theme_plugin{
 	 * @param string
 	 * @return string 
 	 */
-	public static function markdown($text){
+	public static function markdown($text) {
 		require_once 'Parsedown.php';
 		return Parsedown::instance()->setBreaksEnabled(true)->text($text);
+	}
+	
+	/**
+	 * 初始化-注册插件
+	 * 
+	 * @access public
+	 */
+	public static function init() {
+		/** 注册插件 */
+		$advanced = Helper::options()->advanced;
+		Typecho_Plugin::factory('admin/footer.php')->end = ['theme_plugin', 'admin_footer'];
+		Typecho_Plugin::factory('Widget_Abstract_Contents')->contentEx = ['theme_plugin', 'Widget_Abstract_Contents_contentEx'];
+		if(inArray('Parsedown', $advanced)){
+			Typecho_Plugin::factory('Widget_Abstract_Contents')->markdown = ['theme_plugin', 'markdown'];
+			Typecho_Plugin::factory('Widget_Abstract_Comments')->markdown = ['theme_plugin', 'markdown'];
+		}
+		if(!class_exists('ShortCode')&&inArray('ShortCode', $advanced))
+			require_once 'ShortCode.php';
 	}
 }
 ?>

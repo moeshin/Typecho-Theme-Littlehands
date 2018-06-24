@@ -4,7 +4,7 @@
  * 
  * @package Littlehands
  * @author 小さな手は
- * @version 1.0.0
+ * @version 1.0.1
  * @link http://www.littlehands.site/
  */
 
@@ -49,7 +49,7 @@ $this->need('header.php');
 		$this->setTotal($this->getTotal()-count($sticky_cids));
 	}
 	while($this->next()): ?>
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+		<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 			<h1 class="post-title" itemprop="name headline"><a itemprop="url" href="<?php $this->permalink() ?>"><?php $this->sticky(); $this->title() ?></a></h1>
 			<ul class="post-meta">
 				<li itemprop="author" itemscope itemtype="http://schema.org/Person"><?php _e('作者: '); ?><a itemprop="name" href="<?php $this->author->permalink(); ?>" rel="author"><?php $this->author(); ?></a></li>
@@ -57,14 +57,14 @@ $this->need('header.php');
 				<li><?php _e('分类: '); ?><?php $this->category(','); ?></li>
 				<li itemprop="interactionCount"><a itemprop="discussionUrl" href="<?php $this->permalink() ?>#comments"><?php $this->commentsNum('评论', '1 条评论', '%d 条评论'); ?></a></li>
 			</ul>
-            <div class="post-content" itemprop="articleBody">
-    			<?php excerpt($this); ?>
+			<div class="post-content" itemprop="articleBody">
+				<?php excerpt($this); ?>
 				<p><a href="<?php $this->permalink() ?>">阅读全文</a></p>
-            </div>
-        </article>
+			</div>
+		</article>
 	<?php endwhile; ?>
 
-    <?php $this->pageNav('&laquo; 前一页', '后一页 &raquo;'); ?>
+	<?php $this->pageNav('&laquo; 前一页', '后一页 &raquo;'); ?>
 </div><!-- end #main-->
 
 <?php $this->need('sidebar.php'); ?>

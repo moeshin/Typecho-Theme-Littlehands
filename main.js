@@ -99,7 +99,7 @@ main.bindVisibilityChange = function(){
  * @return void
  */
 main.hitokoto = function(){
-	if($('#hitokoto').length == 1)$.getJSON('https://sslapi.hitokoto.cn/',{encode: 'json'},function(data){
+	if($('#hitokoto').length == 1)$.getJSON('https://v1.hitokoto.cn',{encode: 'json'},function(data){
 		switch(data.type){
 			case 'a': data.type = 'Anime - 动画'; break;
 			case 'b': data.type = 'Comic – 漫画'; break;
@@ -112,7 +112,7 @@ main.hitokoto = function(){
 		}
 		var time = new Date(data.created_at * 1000);
 		$('#hitokoto').text(data.hitokoto);
-		$('#hitokoto').attr('href','http://hitokoto.cn?id=' + data.id);
+		$('#hitokoto').attr('href','https://hitokoto.cn?id=' + data.id);
 		$('#hitokoto').attr('title','分类：' + data.type + '\n出自：' + data.from + '\n投稿：creator @ ' + time.toLocaleString());
 	});
 };

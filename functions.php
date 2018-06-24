@@ -2,6 +2,7 @@
 timer_start(); //记录开始时间
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 require_once 'assets/php/Plugin.php';
+theme_plugin::init();
 function themeConfig($form) {
 	$themeUrl = Helper::options()->themeUrl;
 	$siteUrl = Helper::options()->siteUrl;

@@ -1,7 +1,7 @@
 # Typecho Littlehands 主题
 一款基于Typecho原生主题修改的主题
 
-Dome: https://www.littlehands.site/
+Demo: https://www.littlehands.site/
 
 [GitHub 地址](https://github.com/moeshin/Typecho-Theme-Littlehands) | [GitHub 下载](https://codeload.github.com/moeshin/Typecho-Theme-Littlehands/zip/master)
 
@@ -24,3 +24,9 @@ Dome: https://www.littlehands.site/
 ## 预览
 ![PC](https://www.littlehands.site/usr/uploads/2018/06/1331469966.png)
 ![Phone](https://www.littlehands.site/usr/uploads/2018/06/3486007663.png)
+
+## 更新
+**2018.06.24 v1.0.1**
+- 更新 [QPlayer](https://github.com/moeshin/QPlayer)
+- 更新 [Hitokoto](https://hitokoto.cn/) [API地址](https://hitokoto.cn/api)
+- 添加 检测更新
