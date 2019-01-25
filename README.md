@@ -28,6 +28,7 @@ Demo: https://www.littlehands.site/
 ## 更新
 **2019.01.25 v1.0.2**
 - 更新 [QPlayer](https://github.com/moeshin/QPlayer)
+- 修复 检测更新
 
 **2018.06.24 v1.0.1**
 - 更新 [QPlayer](https://github.com/moeshin/QPlayer)

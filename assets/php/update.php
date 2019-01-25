@@ -9,7 +9,7 @@ header("Content-type: text/javascript; charset=utf-8");
 
 $ver = @file_get_contents('http://api.littlehands.site/Typecho/Theme/Littlehands/version.txt') or exit;
 
-require '..\..\..\..\..\var\Typecho\Plugin.php';
+require '../../../../../var/Typecho/Plugin.php';
 
-echo version_compare($ver, Typecho_Plugin::parseInfo('..\..\index.php')['version']);
+echo version_compare($ver, Typecho_Plugin::parseInfo('../../index.php')['version']);
 ?>
