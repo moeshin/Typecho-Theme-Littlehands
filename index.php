@@ -4,7 +4,7 @@
  * 
  * @package Littlehands
  * @author 小さな手は
- * @version 1.0.1
+ * @version 1.0.2
  * @link http://www.littlehands.site/
  */
 

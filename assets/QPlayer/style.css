@@ -1,3 +1,11 @@
+/**
+ * QPlayer
+ * 一款简洁小巧的HTML5底部悬浮音乐播放器
+ * @author 小さな手は
+ * @version 1.0.2
+ * @link https://www.littlehands.site/
+ * @link https://github.com/moeshin/QPlayer/
+ */
 #QPlayer ::-webkit-scrollbar {
 	width: 3px;
 }

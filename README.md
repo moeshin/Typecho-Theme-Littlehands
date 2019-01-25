@@ -26,6 +26,9 @@ Demo: https://www.littlehands.site/
 ![Phone](https://www.littlehands.site/usr/uploads/2018/06/3486007663.png)
 
 ## 更新
+**2019.01.25 v1.0.2**
+- 更新 [QPlayer](https://github.com/moeshin/QPlayer)
+
 **2018.06.24 v1.0.1**
 - 更新 [QPlayer](https://github.com/moeshin/QPlayer)
 - 更新 [Hitokoto](https://hitokoto.cn/) [API地址](https://hitokoto.cn/api)

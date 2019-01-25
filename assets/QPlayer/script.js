@@ -3,7 +3,7 @@
  * 一款简洁小巧的HTML5底部悬浮音乐播放器
  * @package QPlayer
  * @author 小さな手は
- * @version 1.0.1
+ * @version 1.0.2
  * @link https://www.littlehands.site/
  * @link https://github.com/moeshin/QPlayer/
  */
@@ -263,7 +263,7 @@ $(function () {
 					if (id !== q.current.id)
 						return;
 					var url;
-					if ((url = json[1].url) == 'http://music.163.com/404') {
+					if ((url = json[json.length - 1].url) == 'http://music.163.com/404') {
 						q.error();
 						return;
 					}
