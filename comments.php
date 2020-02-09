@@ -173,7 +173,7 @@ echo $commentClass;
 ?>">
 	<div id="<?php $comments->theId(); ?>">
 		<div class="comment-author">
-			<img class="avatar" src="<?php echo preg_replace('/\/$/','',Helper::options()->gravatar).'/'.md5(strtolower($comments->mail)).'?s=100&r='.Helper::options()->commentsAvatarRating.'&d='.Typecho_Widget::widget('Widget_Options')->motx; ?>" alt="<?php echo $comments->author; ?>" width="40" height="40"/>
+			<img class="avatar" src="<?php echo get_avatar($comments->mail); ?>" alt="<?php echo $comments->author; ?>" width="40" height="40"/>
 			<cite class="fn">
 			<a href="<?php $comments->url(); ?>" target="_blank" rel="external nofollow"><?php echo $comments->author; ?></a></cite>
 			<span class="idcard"><?php echo $idcard; ?></span>

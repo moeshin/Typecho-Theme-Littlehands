@@ -254,3 +254,18 @@ function inArray($a, $arr) {
 		return false;
 	return in_array($a, $arr);
 }
+
+/**
+ * 获取头像
+ *
+ * @param string $email
+ * @return string
+ */
+function get_avatar($email) {
+    if (preg_match('/^(\d+)@qq\.com$/i', $email, $matches)) {
+        return "https://q1.qlogo.cn/g?b=qq&s=100&nk=$matches[1]";
+    }
+    $r = Helper::options()->commentsAvatarRating;
+    $d = Typecho_Widget::widget('Widget_Options')->motx; // 默认头像
+    return preg_replace('/\/$/', '', Helper::options()->gravatar) . '/' . md5(strtolower($email)) . "?s=100&r=$r&d=$d";
+}
