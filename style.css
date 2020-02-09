@@ -225,7 +225,7 @@ textarea {
 	padding-left: 12px;
 	border-left: 1px solid #EEE;
 }
-.post-meta li: first-child {
+.post-meta li:first-child {
 	margin-left: 0;
 	padding-left: 0;
 	border: none;
@@ -372,7 +372,7 @@ textarea {
 	margin-bottom: .5em;
 	font-weight: bold;
 }
-#comment-form .required: after {
+#comment-form .required:after {
 	content: " *";
 	color: #C00;
 }
