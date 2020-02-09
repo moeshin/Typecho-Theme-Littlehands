@@ -96,7 +96,7 @@ function themeInit($archive){
 	Helper::options()->commentsAntiSpam = false;//强制关闭反垃圾评论
 	Helper::options()->commentsHTMLTagAllowed .= '<img src="" class="">';//追加允许使用的HTML标签和属性
 	if(class_exists('ShortCode'))
-		ShortCode::set(['video','audio'],'ShorCode');
+		ShortCode::set(['video','audio'],'ShortCode');
 }
 
 function themeFields($layout){
@@ -113,9 +113,17 @@ function themeFields($layout){
  * @param string
  * @return string
  */
-function ShorCode($name,$attr,$text,$code){
+function ShortCode($name,$attr,$text,$code){
 	switch($name){
 		case 'video':
+		    if (preg_match('#^https?://(?:www|m).bilibili.com/video/av(\d+)(.*)#i', $text, $matches)) {
+                $av = $matches[1];
+                $p = 1;
+                if ($matches[2] && preg_match('/(?:\?|&)p=(\d+)(?:&|$)/i', $matches[2], $matches)) {
+                    $p = $matches[1];
+                }
+                return "<div class=\"bilibili\"><iframe$attr src=\"https://player.bilibili.com/player.html?aid=$av&page=$p\" allowfullscreen></iframe></div>";
+            }
 			return '<video controls="controls"'.$attr.'><source src="'.$text.'"></video>';
 		case 'audio':
 			return '<audio controls="controls"'.$attr.'><source src="'.$text.'"></audio>';

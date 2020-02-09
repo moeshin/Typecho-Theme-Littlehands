@@ -818,6 +818,19 @@ img.alignright {
   counter-increment: p;
   content: counters(p,'.')'. ';
 }
+.bilibili {
+	position: relative;
+	padding-bottom: 65%;
+	margin-top: 1em;
+}
+.bilibili iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: none;
+}
 ::-webkit-input-placeholder {
 	color:#666;
 }
