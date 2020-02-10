@@ -482,7 +482,7 @@ main.TOC.a = function(){
  */
 main.console = function(){
 	if(typeof eruda == 'undefined')
-		$.getScript('//cdn.bootcss.com/eruda/1.3.2/eruda.min.js',function(){
+		$.getScript('https://cdnjs.loli.net/ajax/libs/eruda/1.3.2/eruda.min.js',function(){
 			main.console();
 		});
 	else 
