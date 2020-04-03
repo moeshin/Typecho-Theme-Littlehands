@@ -5,6 +5,10 @@ Demo: https://www.littlehands.site/
 
 [GitHub 地址](https://github.com/moeshin/Typecho-Theme-Littlehands) | [GitHub 下载](https://codeload.github.com/moeshin/Typecho-Theme-Littlehands/zip/master)
 
+## 使用说明
+
+把主题文件夹重命名为 `Littlehands`，名称太长会报错。
+
 ## 功能
 - 代码高亮，支持多种语言
 - 使用QPlayer播放器（目前仅支持播放网易云音乐的歌单）
