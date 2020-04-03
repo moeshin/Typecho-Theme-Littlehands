@@ -200,6 +200,7 @@ $(function () {
 			type: 'list',
 			id: q.id
 		},
+		dataType: 'jsonp',
 		success: function (json) {
 			q.list = json;
 			if (testList()) {
@@ -259,6 +260,7 @@ $(function () {
 					url: 'https://music.163.com/song/media/outer/url?id='+id,
 					type: 1
 				},
+				dataType: 'jsonp',
 				success: function (json) {
 					if (id !== q.current.id)
 						return;
@@ -278,7 +280,7 @@ $(function () {
 				return;
 			audio.play();
 		}
-	}
+	};
 	
 	/**
 	 * 加载
@@ -311,6 +313,7 @@ $(function () {
 				type: 'lyric',
 				id: data.id
 			},
+			dataType: 'jsonp',
 			success: function (json) {
 				json.lyric.replace(lyricRegex1, function (match1, t, str) {
 					var times = [];
