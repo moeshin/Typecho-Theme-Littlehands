@@ -91,13 +91,13 @@
 }
 #QPlayer .title {
 	overflow: hidden;
+	white-space:nowrap;
 }
 #QPlayer .title strong, #QPlayer .title span {
 	display: inline;
 	width: 80%;
 	font-size: 85%;
 	text-overflow: ellipsis;
-	white-space: nowrap;
 }
 #QPlayer .title span {
 	margin-top: 5px;
