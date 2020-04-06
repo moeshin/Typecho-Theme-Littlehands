@@ -99,7 +99,13 @@ $(function () {
 	 * @return int
 	 */
 	function random() {
-		return q.list instanceof Array?q.isRandom?Math.round(Math.random()*q.list.length-1):++q.listIndex == q.list.length?0:q.listIndex:0;
+		if (q.list instanceof Array) {
+			if (q.isRandom) {
+				return Math.round(Math.random() * q.list.length-1);
+			}
+			return ++q.listIndex === q.list.length ? 0 : q.listIndex;
+		}
+		return 0;
 	}
 	
 	/**
@@ -179,25 +185,28 @@ $(function () {
 			 * 
 			 * @link https://github.com/moeshin/API-NeteaseMusic/
 			 */
-			api1 = '//api.littlehands.site/NeteaseMusic/',
+			api1 = 'https://api.littlehands.site/NeteaseMusic/',
 			
 			/**
 			 * 重定向API
 			 * 
 			 * @link https://github.com/moeshin/API-Redirect/
 			 */
-			api2 = '//api.littlehands.site/Redirect/',
+			api2 = 'https://api.littlehands.site/Redirect/',
 			
-			lyricRegex1 = /(?:^|\n)((?:\[\d\d:\d\d\.\d{2,3}\])+)(.*)/g;
+			lyricRegex1 = /(?:^|\n)((?:\[\d\d:\d\d\.\d{2,3}\])+)(.*)/g,
 			lyricRegex2 = /\[(\d\d):(\d\d\.\d{2,3})\]/g;
 		
 	q.list = [];
+	if (!q.type) {
+		q.type = 'list';
+	}
 	
 	//获取播放歌单列表
 	$.ajax({
 		url: api1,
 		data: {
-			type: 'list',
+			type: q.type,
 			id: q.id
 		},
 		dataType: 'jsonp',
@@ -213,8 +222,14 @@ $(function () {
 				
 				$listLi = $list.find('li').click(function () {
 					var obj = $(this);
-					if (!obj.hasClass('error'))
-						q.play(obj.index());
+					if (!obj.hasClass('error')) {
+						// 清除当前历史节点之后的内容
+						q.history = q.history.slice(0, ++q.histIndex);
+
+						var index = obj.index();
+						q.play(index);
+						q.history.push(index);
+					}
 				});
 				
 				//触发监听事件
@@ -264,19 +279,19 @@ $(function () {
 				success: function (json) {
 					if (id !== q.current.id)
 						return;
-					var url;
-					if ((url = json[json.length - 1].url) == 'http://music.163.com/404') {
+					var url = json[json.length - 1].url;
+					if (/^https?:\/\/music.163.com\/404\b/.test(url)) {
 						q.error();
 						return;
 					}
-					audio.src = url.replace(/^http(s|):/, '');
+					audio.src = url.replace(/^http:\/\//, 'https://');
 					q.playId = id;
 					if ($player.hasClass('playing'))
 						audio.play();
 				}
 			});
 		} else {
-			if (q.playId !== q.current.id || audio.networkState == 3)
+			if (q.playId !== q.current.id || audio.networkState === 3)
 				return;
 			audio.play();
 		}
@@ -284,22 +299,31 @@ $(function () {
 	
 	/**
 	 * 加载
-	 * 
-	 * @param int
-	 * @return void
+	 *
+	 * @param n
+	 * @return boolean 是否跳过
 	 */
 	q.load = function (n) {
-		if (n < 0 || $listLi.eq(n).hasClass('error')) {
-			q.next();
-			return true;
+		if (typeof(n) === "number") {
+			if (n < 0) {
+				return true;
+			}
+			if ($listLi.eq(n).hasClass('error')) {
+				if (q.history[q.histIndex] === n) {
+					q.history.splice(q.histIndex--, 1);
+				}
+				q.next();
+				return true;
+			}
+		} else {
+			// 首次初始化，不预加载音频，节省移动设备流量
+			return false;
 		}
-		if (n == null)
-			return;
-		q.listIndex = n
+		q.listIndex = n;
 		$listLi.removeClass('current').eq(n).addClass('current');
 		var data = q.current = QPlayer.list[n];
 		$title.html('<strong>'+data.name+'</strong><span> - </span><span class="artist">'+data.artist.join('/')+'</span>');
-		$cover.attr('src', data.pic.replace(/^http(s|):/i,''));
+		$cover.attr('src', data.pic.replace(/^http:\/\//i,'https://'));
 		$already.width('0%');
 		$timer.text('00:00');
 		$lyricOl.addClass('no').html('<li>暂无歌词，请欣赏</li>');
@@ -355,31 +379,32 @@ $(function () {
 			}
 		});
 		isLoad = true;
-	}
+	};
 	
 	/**
 	 * 暂停
 	 * 
 	 */
 	q.pause = function () {
-		if (audio.networkState == 3)
+		if (audio.networkState === 3)
 			return;
 		$player.removeClass('playing');
 		audio.pause();
-	}
+	};
 	
 	/**
 	 * 下一首
 	 * 
 	 */
 	q.next = function () {
-		q.histIndex++;
-		if (q.histIndex == q.history.length) {
-			q.play(random());
-			q.history.push(q.listIndex);
-		} else
+		if (++q.histIndex < q.history.length) {
 			q.play(q.history[q.histIndex]);
-	}
+		} else {
+			var index = random();
+			q.history.push(index);
+			q.play(index);
+		}
+	};
 	
 	/**
 	 * 上一首
@@ -397,7 +422,7 @@ $(function () {
 			q.histIndex = 0;
 		} else
 			q.play(q.history[--q.histIndex]);
-	}
+	};
 	
 	/**
 	 * 播放错误
@@ -407,7 +432,7 @@ $(function () {
 		$listLi.eq(q.listIndex).addClass('error');
 		q.history.splice(q.histIndex--, 1);
 		q.next();
-	}
+	};
 	
 	/**
 	 * 设置rotate
@@ -422,7 +447,7 @@ $(function () {
 			$cover.attr('title', '点击旋转封面');
 			$cover.removeClass('rotate');
 		}
-	}
+	};
 	
 	/**
 	 * .pop-btn点击
@@ -525,7 +550,7 @@ $(function () {
 				$already.width(100*audio.currentTime/audio.duration+"%");
 			
 			//播放歌词
-			if (lyric.index+1 != lyric.arr.length)
+			if (lyric.index+1 !== lyric.arr.length)
 				if (lyric.arr[lyric.index+1] <= audio.currentTime)
 					lyricSelect(++lyric.index);
 		})

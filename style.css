@@ -878,7 +878,7 @@ img.alignright {
 		height: 100%;
 		overflow: auto;
 		background-color: rgba(0,0,0,0.8);
-		z-index: 3;
+		z-index: 666;
 	}
 	#secondary::-webkit-scrollbar-track-piece{
 		background: #eee

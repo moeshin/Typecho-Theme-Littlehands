@@ -51,10 +51,12 @@
 	}
 }
 #QPlayer {
+	z-index: 1;
 	position: fixed;
 	left: -250px;
 	bottom: 50px;
 	transition: transform .8s;
+	pointer-events: none;
 }
 #QPlayer.pop {
 	transform: translateX(250px);
@@ -313,4 +315,7 @@
 }
 #QPlayer .more, #QPlayer.pop .more.lyric-show {
 	transform: translateX(-250px);
+}
+#QPlayer .body, #QPlayer .list, #QPlayer .lyric {
+	pointer-events: auto;
 }
