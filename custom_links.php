@@ -13,7 +13,7 @@
         <div class="post-content" itemprop="articleBody">
 			<div class="links">
 				<?php
-				echo preg_replace_callback('#<li>\s<a .*?>(<img .*?data-original=")(.*?)(".*?>)</a>(<a .*?>)(.*?)</a>\s</li>#',function($matches){
+				echo preg_replace_callback('#<li>\s<a [\s\S]*?>(<img [\s\S]*?data-original=")(.*?)("[\s\S]*?>)</a>\s*(<a [\s\S]*?)>([\s\S]*?)</a>\s</li>#',function($matches){
 					$src = $matches[2];
 					if(!filter_var($src,FILTER_VALIDATE_URL)){
 						if(filter_var($src,FILTER_VALIDATE_EMAIL))
@@ -23,7 +23,15 @@
 						else
 							$src = "https://q.qlogo.cn/g?b=qq&nk=$src&s=100";
 					}
-					return $matches[4].'<div class="links-body">'.$matches[1].$src.$matches[3].'<p>'.$matches[5].'</p></div></a>';
+					$title = '';
+					$img = preg_replace_callback('# alt="([\s\S]*?)"#', function ($matches) use (&$title) {
+                        $title = $matches[1];
+					    return '';
+					},$matches[1].$src.$matches[3]);
+					if (!empty($title)) {
+					    $title = "title=\"$title\"";
+                    }
+					return $matches[4].$title.'><div class="links-body">'.$img.'<p>'.$matches[5].'</p></div></a>';
 				},$this->content);
 				?>
 			</div>

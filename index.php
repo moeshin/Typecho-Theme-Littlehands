@@ -3,9 +3,9 @@
  * 这是一套根据 Typecho 0.9 系统的默认皮肤修改的主题
  * 
  * @package Littlehands
- * @author 小さな手は
+ * @author MoeShin
  * @version 1.0.2
- * @link http://www.littlehands.site/
+ * @link https://moeshin.com/
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
