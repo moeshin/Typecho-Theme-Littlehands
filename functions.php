@@ -26,7 +26,7 @@ function themeConfig($form) {
 	$cdn = new Typecho_Widget_Helper_Form_Element_Text('cdn',NULL,'https://cdnjs.loli.net/ajax/libs/',_t('CDN 源'),_t('默认：https://cdnjs.loli.net/ajax/libs/'));
     $form->addInput($cdn);
 
-    $gravatar = new Typecho_Widget_Helper_Form_Element_Text('gravatar',NULL,'https://cdn.v2ex.com/gravatar/',_t('Gravatar 头像源'),_t('默认：https://cdn.v2ex.com/gravatar/'));
+    $gravatar = new Typecho_Widget_Helper_Form_Element_Text('gravatar',NULL,'https://gravatar.loli.net/avatar/',_t('Gravatar 头像源'),_t('默认：https://gravatar.loli.net/avatar/'));
 	$form->addInput($gravatar);
 	
 	$lazyload_img = new Typecho_Widget_Helper_Form_Element_Text('lazyload_img',NULL,'{themeUrl}/loading.gif',_t('懒加载占位图片'),'内容替换：<br>{siteUrl}：网站地址<br>{themeUrl}：主题地址');
