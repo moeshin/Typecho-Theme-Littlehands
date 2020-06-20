@@ -160,6 +160,7 @@ textarea {
 	font-style: italic;
 }
 #nav-menu {
+    margin-top: 8px;
 	padding: 0;
 }
 #nav-menu a {
@@ -858,8 +859,9 @@ img.alignright {
 	#logo-img {
 		float: none;
 	}
-	#nav-menu{
+	#nav-menu {
 		text-align: center;
+        margin-top: 0;
 	}
     #comment-form input.text{
 		width: 100%;
