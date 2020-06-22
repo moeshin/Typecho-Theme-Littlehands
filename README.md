@@ -13,7 +13,6 @@ Demo: https://www.littlehands.site/
 ### 功能
 
 - 代码高亮，支持多种语言
-- 使用QPlayer播放器（目前仅支持播放网易云音乐的歌单）
 - 使用PJAX加载网页
 - 在页脚引用一言
 - 自定义页眉、页脚

@@ -379,48 +379,8 @@ $('#emoji-edit-json textarea').blur(function(){
 	}
 });
 
-//QPlayer
-window.QPlayer = {};
-(function () {
-	var
-		input = $('[name="QPlayer"]'),
-		json = input.val(),
-		q = QPlayer;
-	
-	if (json)
-		q.json = json = JSON.parse(json);
-		
-	input.parent().parent().after('<ul class="typecho-option" id="QPlayer"><label class="typecho-label">QPlayer</label><p>网易云音乐歌单ID<input class="text" type="text" id="QPlayer-id"></p><span class="multiline"><input type="checkbox" id="QPlayer-isAuto"><label for="QPlayer-isAuto"> 自动播放</label></span><span class="multiline"><input type="checkbox" id="QPlayer-isRandom"><label for="QPlayer-isRandom"> 随机播放</label></span><span class="multiline"><input type="checkbox" id="QPlayer-isRotate"><label for="QPlayer-isRotate"> 封面旋转</label></span></ul>');
-
-	var
-		obj = $('#QPlayer'),
-		a = obj.find('#QPlayer-id'),
-		b = obj.find('#QPlayer-isAuto'),
-		c = obj.find('#QPlayer-isRandom'),
-		d = obj.find('#QPlayer-isRotate');
-	
-	if (json) {
-		a.val(json.id);
-		b.prop('checked', json.isAuto);
-		c.prop('checked', json.isRandom);
-		d.prop('checked', json.isRotate);
-	}
-	
-	q.submit = function () {
-		q.data = {
-			id: a.val(),
-			isAuto: b.prop('checked'),
-			isRandom: c.prop('checked'),
-			isRotate: d.prop('checked'),
-		};
-		input.val(JSON.stringify(q.data));
-	}
-	
-})();
 $('form').submit(function(){
 	emoji.setData();
-	if (QPlayer)
-		QPlayer.submit();
 });
 
 /**
