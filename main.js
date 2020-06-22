@@ -338,6 +338,21 @@ main.comments.success = function(data){
 	if(window.NProgress) NProgress.done();
 };
 
+main.anchorCommentLinkDom = function(dom) {
+    if(dom.hash){
+        var li = $(dom.hash).parent();
+        if(li.length){
+            main.anchorPoint(li);
+            return false;
+        }
+    }
+}
+
+$(document)
+    .on('click', '.at-user', function () {
+        return main.anchorCommentLinkDom(this);
+    });
+
 /**
  * 移动菜单按钮被点击
  * 
@@ -363,13 +378,8 @@ main.mobileMenu.click = function(e){
 		setTimeout(function(){
 			obj.click();
 		}, 500);
-	}else if(this.hash){
-		var li = $(this.hash).parent();
-		if(li.length){
-			main.anchorPoint(li);
-			return false;
-		}
 	}
+    return main.anchorCommentLinkDom(this);
 };
 
 /**

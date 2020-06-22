@@ -143,10 +143,13 @@ function getUA($ua){
 return '<span class="useragent"><img src="'.$imgurl.$browser[1].'.png"> '.$browser[0].'  <img src="'.$imgurl.$os[1].'.png"> '.$os[0].'</span>';
 }
 
+global $atUserList;
+$atUserList = array();
 /**
  * 评论列表重写
  */
 function threadedComments($comments, $options) {
+    global $atUserList;
 	$commentClass = '';
 	if ($comments->authorId) {
 		if ($comments->authorId == $comments->ownerId) {
@@ -159,8 +162,7 @@ function threadedComments($comments, $options) {
 	}else{
 		$commentClass .= ' comment-by-visitor';
 		$idcard = '访客';
-	}
-	$commentLevelClass = $comments->levels > 0 ? ' comment-child' : ' comment-parent'; ?>
+	} ?>
 <li itemscope itemtype="http://schema.org/UserComments" id="li-<?php $comments->theId(); ?>" class="comment-body<?php
 if ($comments->levels > 0) {
 	echo ' comment-child';
@@ -191,16 +193,34 @@ HTML;
 		</div>
 		<div class="comment-meta">
 			<time href="<?php $comments->permalink(); ?>"><?php $comments->date('Y年m月d日 H:i:s'); ?></time>
-		</div>
-		<?php $comments->content(); ?>
-	</div>
-	<?php if ($comments->children) { ?>
-	<div class="comment-children">
-		<?php $comments->threadedComments($options); ?>
-	</div>
-	<?php } ?>
-</li>
-<?php } ?>
+		</div><?php
+		$parent = $comments->parent;
+		if ($parent) {
+		    $parent = $atUserList[$parent];
+		    if (!empty($parent)) {
+                echo $parent;
+		    }
+		}
+		$comments->content(); ?>
+    </div><?php
+    if ($comments->children) {
+        $atUserList[$comments->coid] = <<<HTML
+<p>回复 <a class="at-user" href="{$comments->permalink}">@$comments->author</a>：</p>
+HTML;
+        if ($comments->levels == 0) { ?>
+    <div class="comment-children">
+    <?php $comments->threadedComments($options); ?>
+    </div>
+</li><?php
+        } else {
+            echo '</li>';
+            $comments->threadedComments($options);
+        }
+    } else {
+        echo '</li>';
+    }
+}
+?>
 
 <div id="comments">
     <?php $this->comments()->to($comments); ?>

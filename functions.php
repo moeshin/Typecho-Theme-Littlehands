@@ -99,8 +99,10 @@ function themeConfig($form) {
 }
 
 function themeInit($archive){
-	Helper::options()->commentsAntiSpam = false;//强制关闭反垃圾评论
-	Helper::options()->commentsHTMLTagAllowed .= '<img src="" class="">';//追加允许使用的HTML标签和属性
+    $options = Helper::options();
+	$options->commentsAntiSpam = false;//强制关闭反垃圾评论
+	$options->commentsHTMLTagAllowed .= '<img src="" class="">';//追加允许使用的HTML标签和属性
+	$options->commentsMaxNestingLevels = 999;//拓展可回复数
 	if(class_exists('ShortCode'))
 		ShortCode::set(array('video','audio'),'ShortCode');
 }
