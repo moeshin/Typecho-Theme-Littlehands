@@ -13,7 +13,7 @@ Demo: https://www.littlehands.site/
 ### 功能
 
 - 代码高亮，支持多种语言
-- 使用PJAX加载网页
+- 使用 PJAX 加载网页
 - 在页脚引用一言
 - 自定义页眉、页脚
 - 邮箱头像源设置
@@ -23,10 +23,11 @@ Demo: https://www.littlehands.site/
 - \[TOC\]生成目录
 - 图片灯箱
 - 图片懒加载
-- 使用Parsedown解析
+- 使用 Parsedown 解析
 - 百度统计  
 
 ### 预览
+
 ![PC](https://www.littlehands.site/usr/uploads/2018/06/1331469966.png)
 ![Phone](https://www.littlehands.site/usr/uploads/2018/06/3486007663.png)
 
