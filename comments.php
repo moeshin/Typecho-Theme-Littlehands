@@ -161,7 +161,7 @@ function threadedComments($comments, $options) {
 		$idcard = '访客';
 	}
 	$commentLevelClass = $comments->levels > 0 ? ' comment-child' : ' comment-parent'; ?>
-<li id="li-<?php $comments->theId(); ?>" class="comment-body<?php 
+<li itemscope itemtype="http://schema.org/UserComments" id="li-<?php $comments->theId(); ?>" class="comment-body<?php
 if ($comments->levels > 0) {
 	echo ' comment-child';
 	$comments->levelsAlt(' comment-level-odd', ' comment-level-even');
@@ -172,10 +172,16 @@ $comments->alt(' comment-odd', ' comment-even');
 echo $commentClass;
 ?>">
 	<div id="<?php $comments->theId(); ?>">
-		<div class="comment-author">
+		<div itemprop="creator" itemscope itemtype="http://schema.org/Person" class="comment-author">
 			<img class="avatar" src="<?php echo get_avatar($comments->mail); ?>" alt="<?php echo $comments->author; ?>" width="40" height="40"/>
-			<cite class="fn">
-			<a href="<?php $comments->url(); ?>" target="_blank" rel="external nofollow"><?php echo $comments->author; ?></a></cite>
+			<cite class="fn" itemprop="name"><?php
+                if (empty($comments->url)) {
+                    echo $comments->author;
+                } else {
+                    echo <<<HTML
+ <a href="$comments->url" target="_blank" rel="external nofollow">$comments->author</a>
+HTML;
+                } ?></cite>
 			<span class="idcard"><?php echo $idcard; ?></span>
 			<?php echo getUA($comments->agent); ?>
 			<span class="comment-reply"><?php $comments->reply(); ?></span>
@@ -215,7 +221,18 @@ echo $commentClass;
 			<div class="note"><strong>注意：</strong>已开启评论过滤器，<span>无中文</span>将<span>无法</span>评论！</div>
 			<?php if (!empty($this->options->advanced) && in_array('emoji', $this->options->advanced) && !empty($this->options->emoji)): ?>
 			<div id="comment-more" unselectable="on"><?php
-				echo str_replace(['{themeUrl}','{siteUrl}','data-src'],[preg_replace('/\/$/i','',$this->options->themeUrl),preg_replace('/\/$/i','',$this->options->siteUrl),'src'],$this->options->emoji);
+				echo str_replace(
+				    array(
+				        '{themeUrl}',
+                        '{siteUrl}',
+                        'data-src'
+                    ),
+                    array(
+                        preg_replace('/\/$/i','',$this->options->themeUrl),
+                        preg_replace('/\/$/i','',$this->options->siteUrl),
+                        'src'
+                    ),
+                    $this->options->emoji);
 			?></div>
 			<style>#textarea{border-radius: 0 0 10px 10px !important;}</style>
 			<?php endif; ?>
