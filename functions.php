@@ -71,7 +71,7 @@ function themeConfig($form) {
 	$header = new Typecho_Widget_Helper_Form_Element_Textarea('header',NULL,NULL,_t('自定义页眉'),_t('填写需要的代码，比如css样式、js等'));
 	$form->addInput($header);
 	
-	$footer = new Typecho_Widget_Helper_Form_Element_Textarea('footer',NULL,'Powered by <a href="http://www.typecho.org/" target="_blank">Typecho</a>, Theme by <a href="https://www.littlehands.site/" target="_blank">Littlehands</a>, {inf}<br/>'."\n".'© {Y} <a href="{siteUrl}">{title}</a>. All right reserved. <a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备00000000号</a>',_t('自定义页脚'),
+	$footer = new Typecho_Widget_Helper_Form_Element_Textarea('footer',NULL,'Powered by <a href="http://www.typecho.org/" target="_blank">Typecho</a>, Theme by <a href="https://www.littlehands.site/" target="_blank">Littlehands</a>, {inf}<br/>'."\n".'© {Y} <a href="{siteUrl}">{title}</a>. All right reserved. <a href="http://www.beian.miit.gov.cn/" target="_blank">京ICP备00000000号</a>',_t('自定义页脚'),
 	_t('填写需要的代码，比如版权、备案号、统计代码等<br/>内容替换：<br/>{Y}：当前年份<br/>{title}：网站名称<br/>{siteUrl}：网站地址<br/>{inf}：页面信息'));
 	$form->addInput($footer);
 	
