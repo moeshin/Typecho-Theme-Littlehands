@@ -22,8 +22,8 @@
 
 	<!-- 使用url函数转换相关路径 -->
 	<link href="<?php echo cdn('normalize/7.0.0/normalize.min.css'); ?>" rel="stylesheet">
-	<link rel="stylesheet" href="<?php $this->options->themeUrl('grid.css?t='.time()); ?>">
-	<link rel="stylesheet" href="<?php $this->options->themeUrl('style.css?t='.time()); ?>">
+	<link rel="stylesheet" href="<?php $this->options->themeUrl('grid.css'); ?>">
+	<link rel="stylesheet" href="<?php $this->options->themeUrl('style.css'); ?>">
 	
 	<!-- 背景图片 -->
 	<style>body:before{background-image:url(<?php $this->options->backgroundUrl() ?>);}</style>
@@ -48,7 +48,7 @@
 	<script src="<?php echo cdn('jquery/3.2.1/jquery.min.js'); ?>"></script>
 	<script src="<?php echo cdn('jquery_lazyload/1.9.7/jquery.lazyload.min.js'); ?>"></script>
 	<script src="<?php echo cdn('jQuery.Marquee/1.5.0/jquery.marquee.min.js'); ?>"></script>
-	<script src="<?php $this->options->themeUrl('main.js?t='.time()); ?>"></script>
+	<script src="<?php $this->options->themeUrl('main.js'); ?>"></script>
 	<script src="<?php echo cdn('sweetalert/1.1.3/sweetalert.min.js'); ?>"></script>
 	<script src="<?php echo cdn('lightgallery/1.6.6/js/lightgallery.min.js'); ?>"></script>
 	<script src="<?php echo cdn('lightgallery/1.2.21/js/lg-fullscreen.min.js'); ?>"></script>
@@ -95,12 +95,12 @@
 	<link href="<?php echo cdn('prism/1.10.0/plugins/toolbar/prism-toolbar.min.css'); ?>" rel="stylesheet">
 	<link href="<?php echo cdn('prism/9000.0.1/plugins/autolinker/prism-autolinker.min.css'); ?>" rel="stylesheet">
 	<link href="<?php echo cdn('prism/1.10.0/plugins/previewers/prism-previewers.min.css'); ?>" rel="stylesheet">
-	<link rel="stylesheet" href="<?php $this->options->themeUrl('/assets/css/animation.min.css?t='.time()); ?>">
+	<link rel="stylesheet" href="<?php $this->options->themeUrl('/assets/css/animation.min.css'); ?>">
 	<?php if(inArray('pjax', $this->options->advanced)): ?>
 	<script src="<?php echo cdn('jquery.pjax/2.0.1/jquery.pjax.min.js'); ?>"></script>
 	<link href="<?php echo cdn('nprogress/0.2.0/nprogress.min.css'); ?>" rel="stylesheet">
 	<script src="<?php echo cdn('nprogress/0.2.0/nprogress.min.js'); ?>"></script>
-	<script src="<?php $this->options->themeUrl('pjax.js?t='.time()); ?>"></script>
+	<script src="<?php $this->options->themeUrl('pjax.js?'); ?>"></script>
 	<?php endif; ?>
 	<?php if(inArray('Console', $this->options->advanced)): ?>
 	<script>main.console();</script>
@@ -108,8 +108,8 @@
 	
 	<?php if (inArray('QPlayer', $this->options->advanced)): ?>
 	<!-- QPlayer -->
-	<script src="<?php $this->options->themeUrl('/assets/QPlayer/script.js?t='.time()); ?>"></script>
-	<link rel="stylesheet" href="<?php $this->options->themeUrl('/assets/QPlayer/style.css?t='.time()); ?>">
+	<script src="<?php $this->options->themeUrl('/assets/QPlayer/script.js'); ?>"></script>
+	<link rel="stylesheet" href="<?php $this->options->themeUrl('/assets/QPlayer/style.css'); ?>">
 	<script>$.extend(QPlayer, <?php $this->options->QPlayer(); ?>);</script>
 	<?php endif; ?>
 	
