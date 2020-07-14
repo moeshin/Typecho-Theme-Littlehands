@@ -45,13 +45,14 @@ function themeConfig($form) {
 	    'advanced',
         array(
 			'Console' => _t('显示控制台'),
+            'ShowTitleWithPassword' => _t('密码保护时显示标题'),
 			'pjax' => _t('使用PJAX加载网页'),
-			'hitokoto' => _t('在页脚引用<a href="http://hitokoto.cn/">一言（hitokoto）</a>'),
+			'hitokoto' => _t('在页脚引用 <a href="http://hitokoto.cn/">一言（hitokoto）</a>'),
 			'lazyload' => _t('懒加载'),
 			'emoji' => _t('评论表情'),
 			'ShortCode' => _t('使用短代码'),
-			'Parsedown' => _t('使用Parsedown解析代替原解析'),
-			'prism' => _t('代码框拓展<p class="description">如果当你使用其他的MarkDown解析后最好不要启用<red>代码框拓展</red><br>在注明代码语言后用:号隔开，然后使用以下参数：l表示高亮行，多个用+号分开，连续使用-号；n表示开始行号<br>参数名与参数值之间用.号隔开，参数与参数间用#隔开<br>具体格式：```或~~~语言:参数名.参数值#参数名.参数值<br>例如：```php:l.8+10-15#s.6 则高亮第8、10到15行，从第6行开始<br><strong>注意：</strong>使用的符号都是<red>英文</red>符号</p>')
+			'Parsedown' => _t('使用 Parsedown 解析代替原解析'),
+			'prism' => _t('代码框拓展<p class="description">如果当你使用其他的 MarkDown 解析后最好不要启用 <red>代码框拓展</red><br>在注明代码语言后用:号隔开，然后使用以下参数：l表示高亮行，多个用+号分开，连续使用-号；n表示开始行号<br>参数名与参数值之间用.号隔开，参数与参数间用#隔开<br>具体格式：```或~~~语言:参数名.参数值#参数名.参数值<br>例如：```php:l.8+10-15#s.6 则高亮第8、10到15行，从第6行开始<br><strong>注意：</strong>使用的符号都是<red>英文</red>符号</p>')
         ),
         array(
 			'pjax',

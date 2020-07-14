@@ -93,6 +93,27 @@ class theme_plugin{
 		require_once 'Parsedown.php';
 		return Parsedown::instance()->setBreaksEnabled(true)->text($text);
 	}
+
+	public static function filter($value, $that)
+    {
+        /** 如果访问权限被禁止 */
+        if ($value['hidden']) {
+            $value['text'] = '<form class="protected" action="'
+                . $that->widget('Widget_Security')->getTokenUrl($value['permalink'])
+                . '" method="post">' .
+                '<p class="word">' . _t('请输入密码访问') . '</p>' .
+                '<p><input type="password" class="text" name="protectPassword" />
+            <input type="hidden" name="protectCID" value="' . $value['cid'] . '" />
+            <input type="submit" class="submit" value="' . _t('提交') . '" /></p>' .
+                '</form>';
+
+            $value['tags'] = array();
+            $value['commentsNum'] = 0;
+            $value['hidden'] = false;
+        }
+
+        return $value;
+    }
 	
 	/**
 	 * 初始化-注册插件
@@ -110,6 +131,9 @@ class theme_plugin{
 		}
 		if(!class_exists('ShortCode')&&inArray('ShortCode', $advanced))
 			require_once 'ShortCode.php';
+		if (inArray('ShowTitleWithPassword', $advanced)) {
+            Typecho_Plugin::factory('Widget_Abstract_Contents')->filter = ['theme_plugin', 'filter'];
+        }
 	}
 }
 ?>
