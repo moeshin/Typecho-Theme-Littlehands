@@ -211,7 +211,8 @@ function is_SSL(){
  * @return bool
  */
 function is_Gzip(){
-	return !(strpos(strtolower($_SERVER['HTTP_ACCEPT_ENCODING']),'gzip') === false)?true:false;
+	return isset($_SERVER['HTTP_ACCEPT_ENCODING'])
+        && strpos(strtolower($_SERVER['HTTP_ACCEPT_ENCODING']),'gzip') !== false;
 }
 
 /**
