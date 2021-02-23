@@ -216,7 +216,7 @@ main.comments.textarea.mouse = function(){
  */
 main.comments.emoji.btn.click = function(){
 	var emoji = $(this).parent();
-	$('.emoji').not(emoji).removeClass('emoji-popup');
+	$('.emoji-package').not(emoji).removeClass('emoji-popup');
 	emoji.toggleClass('emoji-popup');
 };
 
@@ -238,7 +238,7 @@ main.comments.emoji.btn.mousedown = function(e){
  */
 main.comments.emoji.click = function(){
 	main.comments.textarea.insert($('img',this)[0].outerHTML);
-	$(this).parent().parent().parent().toggleClass('emoji-popup');
+	$(this).parent().parent().parent().removeClass('emoji-popup');
 };
 
 /**
