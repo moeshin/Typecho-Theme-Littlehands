@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-import urllib
+import urllib.request
 import os
 
 cdn = 'https://cdnjs.loli.net/ajax/libs/'
@@ -14,5 +14,5 @@ for line in urls:
         os.makedirs(dir)
     url = cdn + path
     print(url + ' => ' + path)
-    urllib.urlretrieve(url, path)
+    urllib.request.urlretrieve(url, path)
 urls.close()
