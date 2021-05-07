@@ -23,7 +23,7 @@ function themeConfig($form) {
 	_t('站点ICO图标地址'),_t('在这里填入一个ICO图标URL地址, 以在网站标题上显示一个ICO图标'));
 	$form->addInput($faviconUrl);
 	
-	$cdn = new Typecho_Widget_Helper_Form_Element_Text('cdn',NULL,'https://cdnjs.loli.net/ajax/libs/',_t('CDN 源'),_t('默认：https://cdnjs.loli.net/ajax/libs/'));
+	$cdn = new Typecho_Widget_Helper_Form_Element_Text('cdn',NULL,'https://cdn.staticfile.org/',_t('CDN 源'),_t('默认：https://cdnjs.loli.net/ajax/libs/'));
     $form->addInput($cdn);
 
     $gravatar = new Typecho_Widget_Helper_Form_Element_Text('gravatar',NULL,'https://gravatar.loli.net/avatar/',_t('Gravatar 头像源'),_t('默认：https://gravatar.loli.net/avatar/'));
@@ -296,7 +296,7 @@ function get_avatar($email) {
 function cdn($path) {
     $cdn = Helper::options()->cdn;
     if (!$cdn) {
-        $cdn = 'https://cdnjs.loli.net/ajax/libs/';
+        $cdn = 'https://cdn.staticfile.org/';
     }
     return preg_replace('/\/$/', '', $cdn) . "/$path";
 }
