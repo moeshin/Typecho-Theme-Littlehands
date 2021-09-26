@@ -50,9 +50,9 @@
 	<script src="<?php echo cdn('jQuery.Marquee/1.5.0/jquery.marquee.min.js'); ?>"></script>
 	<script src="<?php $this->options->themeUrl('main.js'); ?>"></script>
 	<script src="<?php echo cdn('sweetalert/1.1.3/sweetalert.min.js'); ?>"></script>
-	<script src="<?php echo cdn('lightgallery/1.6.6/js/lightgallery.min.js'); ?>"></script>
-	<script src="<?php echo cdn('lightgallery/1.2.21/js/lg-fullscreen.min.js'); ?>"></script>
-	<script src="<?php echo cdn('lightgallery/1.2.21/js/lg-zoom.min.js'); ?>"></script>
+	<script src="<?php echo cdn('lightgallery/1.10.0/js/lightgallery.min.js'); ?>"></script>
+	<script src="<?php echo cdn('lg-fullscreen/1.2.1/lg-fullscreen.min.js'); ?>"></script>
+	<script src="<?php echo cdn('lg-zoom/1.3.0/lg-zoom.min.js'); ?>"></script>
 	<script src="<?php echo cdn('clipboard.js/1.7.1/clipboard.min.js'); ?>"></script>
 	<script src="<?php echo cdn('prism/1.10.0/components/prism-core.min.js'); ?>"></script>
 	<script src="<?php echo cdn('prism/1.10.0/components/prism-markup.min.js'); ?>"></script>
@@ -88,7 +88,7 @@
 	<script src="<?php echo cdn('prism/1.10.0/plugins/show-language/prism-show-language.min.js'); ?>"></script>
 	<script src="<?php echo cdn('prism/1.10.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js'); ?>"></script>
   	<link href="<?php echo cdn('sweetalert/1.1.3/sweetalert.min.css'); ?>" rel="stylesheet">
-	<link href="<?php echo cdn('lightgallery/1.6.6/css/lightgallery.min.css'); ?>" rel="stylesheet">
+	<link href="<?php echo cdn('lightgallery/1.10.0/css/lightgallery.min.css'); ?>" rel="stylesheet">
 	<link href="<?php echo cdn('prism/1.10.0/themes/prism-okaidia.min.css'); ?>" rel="stylesheet">
 	<link href="<?php echo cdn('prism/1.10.0/plugins/line-highlight/prism-line-highlight.min.css'); ?>" rel="stylesheet">
 	<link href="<?php echo cdn('prism/1.10.0/plugins/line-numbers/prism-line-numbers.min.css'); ?>" rel="stylesheet">
