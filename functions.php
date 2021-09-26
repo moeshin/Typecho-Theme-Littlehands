@@ -288,6 +288,8 @@ function get_avatar($email) {
     return preg_replace('/\/$/', '', Helper::options()->gravatar) . '/' . md5(strtolower($email)) . "?s=100&r=$r&d=$d";
 }
 
+//$cdnList = [];
+
 /**
  * 获取 CDN
  *
@@ -298,5 +300,26 @@ function cdn($path) {
     if (!$cdn) {
         $cdn = 'https://cdn.staticfile.org/';
     }
-    return preg_replace('/\/$/', '', $cdn) . "/$path";
+    return rtrim($cdn, '/') . "/$path";
 }
+//global $cdnList;
+//$cdnList = [];
+//function cdn($path)
+//{
+//    global $cdnList;
+//    $cdn = 'https://cdn.staticfile.org/';
+//    $cdn = rtrim($cdn, '/') . "/$path";
+//    array_push($cdnList, $path);
+//    return $cdn;
+//}
+//function dump_cdn()
+//{
+//    global $cdnList;
+//    echo '<textarea style="width: 100%; height: 300px;">';
+//    foreach ($cdnList as $cdn)
+//    {
+//        echo $cdn;
+//        echo "\n";
+//    }
+//    echo '</textarea>';
+//}

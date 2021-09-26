@@ -118,6 +118,9 @@
     <?php $this->header('commentReply='); ?>
 </head>
 <body>
+<?php
+//dump_cdn();
+?>
 <header id="header" class="clearfix">
     <div class="container">
         <div class="row">
