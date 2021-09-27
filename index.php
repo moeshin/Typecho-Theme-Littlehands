@@ -35,19 +35,19 @@ $this->need('header.php');
 			$order .= " when $cid then $i";
 			$select2->where('table.contents.cid != ?', $cid);
 		}
-		if ($order) $select1->order(null,"(case cid$order end)");
-		if ($this->_currentPage == 1) foreach($db->fetchAll($select1) as $sticky_post){
+		if ($order) $select1->order('', "(case cid$order end)");
+		if (($this->_currentPage || $this->currentPage) == 1) foreach($db->fetchAll($select1) as $sticky_post){
 			$sticky_post['sticky'] = $sticky_html;
 			$this->push($sticky_post);
 		}
 		
 		$uid = $this->user->uid;
-		if($uid) $select2->orWhere('authorId = ? && status = ?',$uid,'private');
+		if($uid) $select2->orWhere('authorId = ? && status = ?', $uid, 'private');
 		
 		$sticky_posts = $db->fetchAll($select2->order('table.contents.created', Typecho_Db::SORT_DESC)->page($this->_currentPage, $this->parameter->pageSize));
 		foreach($sticky_posts as $sticky_post) $this->push($sticky_post);
 		$this->setTotal($this->getTotal()-count($sticky_cids));
-	}
+    }
 	while($this->next()): ?>
 		<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 			<h1 class="post-title" itemprop="name headline"><a itemprop="url" href="<?php $this->permalink() ?>"><?php $this->sticky(); $this->title() ?></a></h1>
