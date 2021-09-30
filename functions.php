@@ -3,14 +3,22 @@ timer_start(); //记录开始时间
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 require_once 'assets/php/Plugin.php';
 theme_plugin::init();
+
+const __THEME_CDN_JS__ = '//cdn.staticfile.org/';
+const __THEME_CDN_GRAVATAR__ = '//sdn.geekzu.org/avatar/';
+
 function themeConfig($form) {
 	$themeUrl = Helper::options()->themeUrl;
 	$siteUrl = Helper::options()->siteUrl;
 	
 	Typecho_Widget::widget('Widget_User')->to($user);
-	$logoUrl = new Typecho_Widget_Helper_Form_Element_Text('logoUrl',NULL,
-	'https://cdn.v2ex.com/gravatar/'.md5(strtolower($user->mail)).'?s=100',
-	_t('站点 LOGO 地址'),_t('在这里填入一个图片 URL 地址, 以在网站标题前加上一个64*64的LOGO'));
+	$logoUrl = new Typecho_Widget_Helper_Form_Element_Text(
+        'logoUrl',
+        NULL,
+        __THEME_CDN_GRAVATAR__ . md5(strtolower($user->mail)) . '?s=100',
+        _t('站点 LOGO 地址'),
+        _t('在这里填入一个图片 URL 地址, 以在网站标题前加上一个64*64的LOGO')
+    );
 	$form->addInput($logoUrl);
 	
 	$backgroundUrl = new Typecho_Widget_Helper_Form_Element_Text('backgroundUrl',NULL,
@@ -23,10 +31,22 @@ function themeConfig($form) {
 	_t('站点ICO图标地址'),_t('在这里填入一个ICO图标URL地址, 以在网站标题上显示一个ICO图标'));
 	$form->addInput($faviconUrl);
 	
-	$cdn = new Typecho_Widget_Helper_Form_Element_Text('cdn',NULL,'https://cdn.staticfile.org/',_t('CDN 源'),_t('默认：https://cdnjs.loli.net/ajax/libs/'));
+	$cdn = new Typecho_Widget_Helper_Form_Element_Text(
+        'cdn',
+        NULL,
+        __THEME_CDN_JS__,
+        _t('CDN 源'),
+        _t('默认：') . __THEME_CDN_JS__
+    );
     $form->addInput($cdn);
 
-    $gravatar = new Typecho_Widget_Helper_Form_Element_Text('gravatar',NULL,'https://gravatar.loli.net/avatar/',_t('Gravatar 头像源'),_t('默认：https://gravatar.loli.net/avatar/'));
+    $gravatar = new Typecho_Widget_Helper_Form_Element_Text(
+        'gravatar',
+        NULL,
+        'https://gravatar.loli.net/avatar/',
+        _t('Gravatar 头像源'),
+        _t('默认：') . __THEME_CDN_GRAVATAR__
+    );
 	$form->addInput($gravatar);
 	
 	$lazyload_img = new Typecho_Widget_Helper_Form_Element_Text('lazyload_img',NULL,'{themeUrl}/loading.gif',_t('懒加载占位图片'),'内容替换：<br>{siteUrl}：网站地址<br>{themeUrl}：主题地址');
@@ -298,7 +318,7 @@ function get_avatar($email) {
 function cdn($path) {
     $cdn = Helper::options()->cdn;
     if (!$cdn) {
-        $cdn = 'https://cdn.staticfile.org/';
+        $cdn = __THEME_CDN_JS__;
     }
     return rtrim($cdn, '/') . "/$path";
 }
@@ -307,7 +327,7 @@ function cdn($path) {
 //function cdn($path)
 //{
 //    global $cdnList;
-//    $cdn = 'https://cdn.staticfile.org/';
+//    $cdn = __THEME_CDN_JS__;
 //    $cdn = rtrim($cdn, '/') . "/$path";
 //    array_push($cdnList, $path);
 //    return $cdn;
