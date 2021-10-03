@@ -9,7 +9,7 @@ listdir = os.listdir()
 is_win = os.sep == '\\'
 
 
-def custom_sort(d: list[str]) -> list[str]:
+def custom_sort(d: list) -> list:
     _data = {}
     for s in d:
         k = len(s)
@@ -23,7 +23,9 @@ def custom_sort(d: list[str]) -> list[str]:
     keys = sorted(keys)
     d = []
     for k in keys:
-        d.extend(_data[k])
+        _d = _data[k]
+        _d.sort()
+        d.extend(_d)
     return d
 
 
