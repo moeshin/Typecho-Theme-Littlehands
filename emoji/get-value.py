@@ -26,6 +26,6 @@ for emoji in listdir:
                 if is_win:
                     f = f.replace('\\', '/')
             data.append(f)
-    sorted(data)
+    data.sort()
     print(json.dumps(data))
     print()
