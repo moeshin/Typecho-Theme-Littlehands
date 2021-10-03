@@ -8,6 +8,25 @@ import json
 listdir = os.listdir()
 is_win = os.sep == '\\'
 
+
+def custom_sort(d: list[str]) -> list[str]:
+    _data = {}
+    for s in d:
+        k = len(s)
+        _d = _data.get(k)
+        if _d is None:
+            _d = [s]
+            _data[k] = _d
+        else:
+            _d.append(s)
+    keys = _data.keys()
+    keys = sorted(keys)
+    d = []
+    for k in keys:
+        d.extend(_data[k])
+    return d
+
+
 for emoji in listdir:
     if not os.path.isdir(emoji):
         continue
@@ -26,6 +45,6 @@ for emoji in listdir:
                 if is_win:
                     f = f.replace('\\', '/')
             data.append(f)
-    data.sort()
+    data = custom_sort(data)
     print(json.dumps(data))
     print()
