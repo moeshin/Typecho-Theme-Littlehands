@@ -20,7 +20,7 @@ class Custom_Links
         require_once 'assets/php/phpQuery.php';
         $options = Helper::options();
         $this->gravatar = preg_replace('/\/$/','',$options->gravatar).'/';
-        $this->lazyLoad = in_array('lazyload', $options->advanced) ? $options->lazyload_img : false;
+        $this->lazyLoad = in_array('lazyload', $options->advanced) ? getLazyLoadImg() : false;
         $this->srcSelector = $this->lazyLoad ? 'data-original' : 'img';
         $pq = phpQuery::newDocumentHTML($content);
         $pq->find('ul')->each(array($this, 'ul'));

@@ -353,3 +353,22 @@ function cdn($path) {
 //    }
 //    echo '</textarea>';
 //}
+
+function getLazyLoadImg() {
+    /** @noinspection PhpUndefinedClassInspection */
+    $options = Helper::options();
+    $img = $options->lazyload_img;
+    return $img
+        ? str_replace(
+            [
+                '{themeUrl}',
+                '{siteUrl}'
+            ],
+            [
+                $options->themeUrl,
+                $options->siteUrl
+            ],
+            $img
+        )
+        : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYz';
+}

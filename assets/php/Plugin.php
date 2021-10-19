@@ -54,7 +54,7 @@ class theme_plugin{
 		$advanced = Helper::options()->advanced;
 		if($advanced){
 			if(in_array('lazyload',$advanced)){
-				$img = Helper::options()->lazyload_img?str_replace(['{themeUrl}','{siteUrl}'],[Helper::options()->themeUrl,Helper::options()->siteUrl],Helper::options()->lazyload_img):'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYz';
+				$img = getLazyLoadImg();
 				foreach(pq('img') as $val){
 					pq($val)->attr('data-original',pq($val)->attr('src'))->attr('src',$img);
 				}
