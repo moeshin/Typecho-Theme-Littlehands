@@ -11,7 +11,7 @@ $this->need('header.php');
 class Custom_Links
 {
     private $count;
-    private $isLazyLoad;
+    private $lazyLoad;
     private $srcSelector;
     private $gravatar;
 
@@ -20,8 +20,8 @@ class Custom_Links
         require_once 'assets/php/phpQuery.php';
         $options = Helper::options();
         $this->gravatar = preg_replace('/\/$/','',$options->gravatar).'/';
-        $this->isLazyLoad = in_array('lazyload', $options->advanced);
-        $this->srcSelector = $this->isLazyLoad ? 'data-original' : 'img';
+        $this->lazyLoad = in_array('lazyload', $options->advanced) ? $options->lazyload_img : false;
+        $this->srcSelector = $this->lazyLoad ? 'data-original' : 'img';
         $pq = phpQuery::newDocumentHTML($content);
         $pq->find('ul')->each(array($this, 'ul'));
         echo $pq->html();
@@ -78,8 +78,8 @@ class Custom_Links
             else if (preg_match('/^\d{5,}$/', $src) !== false)
                 $src = "https://q.qlogo.cn/g?b=qq&nk=$src&s=100";
         }
-        if ($this->isLazyLoad) {
-            $src = "src=\"https://moeshin.com/usr/themes/Littlehands/loading.gif\" data-original=\"$src\"";
+        if ($this->lazyLoad) {
+            $src = "src=\"$this->lazyLoad\" data-original=\"$src\"";
         } else {
             $src = "src=\"$src\"";
         }
