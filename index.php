@@ -41,8 +41,8 @@ $this->need('header.php');
 			$this->push($sticky_post);
 		}
 		if($this->user->hasLogin()){
-		$uid = $this->user->uid;
-		if($uid) $select2->orWhere('authorId = ? && status = ?', $uid, 'private');
+            $uid = $this->user->uid;
+            if($uid) $select2->orWhere('authorId = ? && status = ?', $uid, 'private');
 		}
 		$sticky_posts = $db->fetchAll($select2->order('table.contents.created', Typecho_Db::SORT_DESC)->page($this->_currentPage, $this->parameter->pageSize));
 		foreach($sticky_posts as $sticky_post) $this->push($sticky_post);

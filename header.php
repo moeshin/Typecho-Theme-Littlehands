@@ -106,13 +106,6 @@
 	<script>main.console();</script>
 	<?php endif; ?>
 	
-	<?php if (inArray('QPlayer', $this->options->advanced)): ?>
-	<!-- QPlayer -->
-	<script src="<?php $this->options->themeUrl('/assets/QPlayer/script.js'); ?>"></script>
-	<link rel="stylesheet" href="<?php $this->options->themeUrl('/assets/QPlayer/style.css'); ?>">
-	<script>$.extend(QPlayer, <?php $this->options->QPlayer(); ?>);</script>
-	<?php endif; ?>
-	
 	<?php $this->options->header(); ?>
     <!-- 通过自有函数输出HTML头部信息 -->
     <?php $this->header('commentReply='); ?>
