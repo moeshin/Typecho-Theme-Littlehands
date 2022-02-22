@@ -1,11 +1,4 @@
-<?php if (!defined('__TYPECHO_ROOT_DIR__')) exit;
-	switch(http_response_code()){
-		case 403: $status = '403 Forbidden'; break;
-		case 404: $status = '404 Not Found'; break;
-		default: $status = 'OBJK';
-	}
-	header("HTTP/1.0 233 $status");
-?>
+<?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <!DOCTYPE HTML>
 <html class="no-js">
 <head>

@@ -28,4 +28,14 @@ $(document).pjax('a[href]:not(a[target="_blank"], a[no-pjax]), a[use-pjax]', {
 	NProgress.done();
 	main.pjax.on = false;
 	main.load();
+}).on('pjax:error', function (e, x, s, t, o) {
+    const code = x.status;
+    switch (code) {
+        case 403:
+        case 404:
+            // https://github.com/defunkt/jquery-pjax/issues/627
+            e.preventDefault();
+            o.success(x.responseText, s, x);
+            return false;
+    }
 });
