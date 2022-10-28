@@ -12,7 +12,7 @@ function download($name, $isMap = false) {
     $path = join('/', [__DIR__, 'local', $name]);
     $dir = dirname($path);
     if (!file_exists($dir)) {
-        mkdir($dir, null, true);
+        mkdir($dir, 644, true);
     }
     printf("%s => %s\n", $url, $path);
     $text = file_get_contents($url);
