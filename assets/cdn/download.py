@@ -25,17 +25,18 @@ def main():
         for line in urls:
             name = line.strip()
             path = download(name)
-            with open(path, encoding='utf-8') as f:
-                search = RE_SOURCE.search(f.read())
-                if search is None:
-                    continue
-                source = search.group(1)
-                if source is None:
-                    source = search.group(2)
-                # print(source)
-                name = os.path.dirname(name) + '/' + source
-                print(name)
-                download(name)
+            if path.endswith('.js') or path.endswith('.css'):
+                with open(path, encoding='utf-8') as f:
+                    search = RE_SOURCE.search(f.read())
+                    if search is None:
+                        continue
+                    source = search.group(1)
+                    if source is None:
+                        source = search.group(2)
+                    # print(source)
+                    name = os.path.dirname(name) + '/' + source
+                    print(name)
+                    download(name)
 
 
 if __name__ == '__main__':
