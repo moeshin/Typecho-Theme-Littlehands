@@ -270,17 +270,6 @@ function write() {
 }
 
 /**
- * 创建一个匿名函数
- * 使用my_create_function 替代 my_create_function 解决 7.20 以上报错问题
- * @param string
- * @param string
- * @return function
- */
-function my_create_function($param,$function) {
-	return eval("return function({$param}){{$function}};");
-}
-
-/**
  * 判断是否为MD5
  *
  * @param string
