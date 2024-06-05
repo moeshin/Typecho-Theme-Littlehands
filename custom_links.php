@@ -58,7 +58,10 @@ class Custom_Links
         if ($img->length != 1) {
             return;
         }
-        $src = $img->attr($this->srcSelector);
+        $src = $img->attr('src');
+        if ($src && str_starts_with($src, 'mailto:')) {
+            $src = substr($src, 7);
+        }
         $desc = $img->attr('alt');
         $a = pq($children->get(1));
         if ($a->length != 1) {

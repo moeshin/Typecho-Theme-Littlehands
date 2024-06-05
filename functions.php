@@ -276,7 +276,7 @@ function write() {
  * @return function
  */
 function is_md5($md5) {
-	return preg_match("/^[a-z0-9]{32}$/", $md5);
+	return $md5 && preg_match("/^[a-z0-9]{32}$/", $md5);
 }
 
 /**
